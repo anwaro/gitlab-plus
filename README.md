@@ -2,7 +2,7 @@
 
 ### Script
 
-Link to script: [greasyfork](https://greasyfork.org/pl/scripts/...)
+Link to script: [greasyfork](https://greasyfork.org/en/scripts/512719-gitlab-plus)
 Link to github: [github](https://github.com/anwaro/gitlab-plus)
 
 ### The script works in:

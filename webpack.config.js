@@ -31,7 +31,7 @@ module.exports = {
         ],
     },
     optimization: {
-        minimize: !isDev,
+        minimize: false,
         minimizer: [
             new TerserPlugin({
                 terserOptions: {
@@ -50,5 +50,10 @@ module.exports = {
             }),
         ],
     },
-    plugins: [new webpack.BannerPlugin({banner: isDev ? '' : header, raw: true})],
+    plugins: [
+        new webpack.BannerPlugin({
+            banner: isDev ? '' : header,
+            raw: true,
+        }),
+    ],
 };
