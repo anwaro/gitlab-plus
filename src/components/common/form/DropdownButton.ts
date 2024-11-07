@@ -1,0 +1,66 @@
+import {Dom} from '../../../helpers/Dom';
+import {IconComponent} from '../IconComponent';
+import {DropdownItem} from './DropdownList';
+import Component from '../Component';
+
+export class DropdownButton<D extends DropdownItem> extends Component<'button'> {
+    private readonly buttonLabel = Dom.element(
+        'span',
+        'gl-new-dropdown-button-text',
+    );
+    private icon = Dom.create({
+        tag: 'span',
+        children: [new IconComponent('chevron', 's16').getIcon()],
+    });
+
+    constructor(
+        private renderLabel: (items: D[]) => HTMLElement,
+        setVisible: (visible: boolean) => void,
+        private reset: () => void,
+    ) {
+        super('button', {
+            classes:
+                'btn btn-default btn-md btn-block gl-button gl-new-dropdown-toggle',
+            attrs: {
+                type: 'button',
+            },
+            events: {
+                click: () => setVisible(true),
+            },
+        });
+
+        document.body.addEventListener('click', (e) => {
+            if (
+                e.target !== this.element &&
+                !this.element.contains(e.target as Node)
+            ) {
+                setVisible(false);
+            }
+        });
+
+        this.element.append(this.buttonInner());
+    }
+
+    private buttonInner() {
+        return Dom.create({
+            tag: 'span',
+            classes: 'gl-button-text gl-w-full',
+            children: [this.buttonLabel, this.icon],
+        });
+    }
+
+    render(items: D[]) {
+        this.buttonLabel.replaceChildren(this.renderLabel(items));
+        const icon = new IconComponent(
+            items.length ? 'close' : 'chevron',
+            's16',
+        ).getIcon();
+        if (items.length) {
+            icon.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.reset();
+            });
+        }
+        this.icon.replaceChildren(icon);
+    }
+}

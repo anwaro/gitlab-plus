@@ -1,9 +1,9 @@
 import {Service} from '../types/Service';
-import ImageModal from '../components/ImageModal';
+import ImagePreviewModal from '../components/ImagePreviewModal';
 import {ImageLinks} from '../helpers/ImageLinks';
 
 export default class ImagePreview implements Service {
-    private modal = new ImageModal();
+    private modal = new ImagePreviewModal();
     private imageLink = new ImageLinks();
 
     public init() {

@@ -16,8 +16,10 @@ Link to github: [github](https://github.com/anwaro/gitlab-plus)
   or [Tampermonkey](https://addons.opera.com/pl/extensions/details/tampermonkey-beta/?display=en) first.)
 - **Safari** (install [Tampermonkey](https://tampermonkey.net/) first.)
 
-| Feature       |                                                                                                |
-|---------------|------------------------------------------------------------------------------------------------|
-| Issue preview | ![Preview](https://raw.githubusercontent.com/anwaro/gitlab-plus/main/assets/issue-preview.png) |
-| Image preview | ![Preview](https://raw.githubusercontent.com/anwaro/gitlab-plus/main/assets/image-preview.png) |
+| Feature              | Example                                                                                                                                                                                                               |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Issue preview        | ![Preview](https://raw.githubusercontent.com/anwaro/gitlab-plus/main/assets/issue-preview.png)                                                                                                                        |
+| Image preview        | ![Preview](https://raw.githubusercontent.com/anwaro/gitlab-plus/main/assets/image-preview.png)                                                                                                                        |
+| Related issue search | ![Preview](https://raw.githubusercontent.com/anwaro/gitlab-plus/main/assets/related-issue-autocomplete.png)                                                                                                           |
+| Create related issue | ![Preview](https://raw.githubusercontent.com/anwaro/gitlab-plus/main/assets/create-related-issue-1.png) </br> ![Preview](https://raw.githubusercontent.com/anwaro/gitlab-plus/main/assets/create-related-issue-2.png) |
 

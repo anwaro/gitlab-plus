@@ -1,13 +1,12 @@
 import {Service} from '../types/Service';
-import IssueModal from '../components/IssueModal';
+import IssuePreviewModal from '../components/IssuePreviewModal';
 import {IssueLinks} from '../helpers/IssueLinks';
 import intendHover from '../helpers/intendHover';
 import {IssueProvider} from '../providers/IssueProvider';
 
 export default class IssuePreview implements Service {
-    private modal = new IssueModal();
+    private modal = new IssuePreviewModal();
     private issue = new IssueProvider();
-    private issueLink = new IssueLinks();
 
     public init() {
         this.initLinks();
@@ -16,7 +15,7 @@ export default class IssuePreview implements Service {
     }
 
     initLinks() {
-        this.issueLink.getLinks().forEach((link) => {
+        IssueLinks.getLinks().forEach((link) => {
             intendHover(link, this.onHover.bind(this));
             link.addEventListener('mouseleave', this.onLeave.bind(this));
         });
@@ -26,10 +25,12 @@ export default class IssuePreview implements Service {
         this.modal.show(event);
 
         const element = event.target as HTMLAnchorElement;
-        const {projectId, issueId} = this.issueLink.parseLink(element.href);
-        const issue = await this.issue.getIssue(projectId, issueId);
+        const link = IssueLinks.parseLink(element.href);
+        if (link) {
+            const issue = await this.issue.getIssue(link.projectPath, link.issue);
 
-        this.modal.updateContent(issue);
+            this.modal.updateContent(issue.data.project.issue);
+        }
     }
 
     onLeave() {

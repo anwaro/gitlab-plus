@@ -31,6 +31,7 @@ module.exports = {
         ],
     },
     optimization: {
+        concatenateModules: true,
         minimize: false,
         minimizer: [
             new TerserPlugin({

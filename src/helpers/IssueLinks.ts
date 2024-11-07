@@ -1,27 +1,43 @@
-export class IssueLinks {
-    private linkReady = 'glp-link-ready';
+export type IssueLink = {
+    issue: string;
+    workspacePath: string;
+    projectPath: string;
+};
 
-    parseLink(link: string) {
-        const [url, issueId] = link.split('/-/issues/');
-        const [_, projectId] = url.split('.com/');
+export class IssueLinks {
+    static linkReady = 'glp-link-ready';
+
+    static parseLink(link: string): IssueLink | undefined {
+        if (!link.includes('/-/issues/')) {
+            return undefined;
+        }
+        const [projectPath, issue] = new URL(link).pathname
+            .replace(/^\//, '')
+            .split('/-/issues/');
+
+        const slashCount = (projectPath.match(/\//g) || []).length;
+
+        const workspacePath =
+            slashCount === 1 ? projectPath : projectPath.replace(/\/[^/]+$/, '');
 
         return {
-            projectId: projectId.replace(/\//g, '%2F'),
-            issueId: issueId.replace(/\D+/g, ''),
+            issue: issue.replace(/\D/g, ''),
+            projectPath,
+            workspacePath,
         };
     }
 
-    getLinks() {
+    static getLinks() {
         const elements = [
             ...document.querySelectorAll<HTMLAnchorElement>('a[href*=issues]'),
         ].filter(
             (link) =>
-                !link.classList.contains(this.linkReady) &&
+                !link.classList.contains(IssueLinks.linkReady) &&
                 /issues\/\d+/.test(link.href),
         );
 
         elements.forEach((link) => {
-            link.classList.add(this.linkReady);
+            link.classList.add(IssueLinks.linkReady);
         });
 
         return elements;

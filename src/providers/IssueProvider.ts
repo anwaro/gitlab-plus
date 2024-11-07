@@ -1,32 +1,74 @@
-import {IssueSchema} from '../types/IssueSchema';
-import Cache from '../services/Cache';
+import {GitlabProvider} from './GitlabProvider';
+import {issueMutation, issueQuery, issuesQuery} from './query/issue';
+import {CreateIssueResponse, IssueResponse, IssuesResponse} from '../types/Issue';
 
-export class IssueProvider {
-    private cache = new Cache();
-    private url = 'https://gitlab.com/api/v4/';
-    private path =
-        'projects/:PROJECT_ID/issues?iids[]=:ISSUE_ID&with_labels_details=true';
+export type CreateIssueInput = {
+    title: string;
+    projectPath: string;
+    assigneeIds?: string[];
+    milestoneId?: string;
+    iterationCadenceId?: string;
+    iterationId?: string;
+    labelIds?: (string | number)[];
+};
 
-    private async get<T>(key: string, path: string): Promise<T> {
-        const cacheValue = this.cache.get<T>(key);
-        if (cacheValue) {
-            return cacheValue;
-        }
+export type CreateIssueLinkInput = {
+    projectId: string | number;
+    issueId: string | number;
+    targetProjectId: string;
+    targetIssueIid: string;
+    linkType: 'relates_to' | 'blocks' | 'is_blocked_by';
+};
 
-        const response = await fetch(`${this.url}${path}`);
-        const issues = await response.json();
-
-        this.cache.set(key, issues[0]);
-
-        return issues[0];
+export class IssueProvider extends GitlabProvider {
+    async getIssue(projectId: string, issueId: string) {
+        return await this.queryCached<IssueResponse>(
+            `glp-issue-${projectId}-${issueId}`,
+            issueQuery,
+            {
+                projectPath: projectId,
+                iid: issueId,
+            },
+            2,
+        );
     }
 
-    async getIssue(projectId: string, issueId: string) {
-        return this.get<IssueSchema>(
-            `glp-issue-${projectId}-${issueId}`,
-            this.path
-                .replace(':PROJECT_ID', projectId)
-                .replace(':ISSUE_ID', issueId),
-        );
+    async getIssues(projectId: string, search: string) {
+        const searchById = !!search.match(/^\d+$/);
+
+        return await this.query<IssuesResponse>(issuesQuery, {
+            iid: searchById ? search : null,
+            searchByIid: searchById,
+            searchEmpty: !search,
+            searchByText: Boolean(search),
+            fullPath: projectId,
+            searchTerm: search,
+            includeAncestors: true,
+            includeDescendants: true,
+            types: ['ISSUE'],
+            in: 'TITLE',
+        });
+    }
+
+    async createIssue(input: CreateIssueInput) {
+        return await this.query<CreateIssueResponse>(issueMutation, {input});
+    }
+
+    async createIssueRelation(input: CreateIssueLinkInput) {
+        const path = [
+            'projects/:PROJECT_ID',
+            '/issues/:ISSUE_ID/links',
+            '?target_project_id=:TARGET_PROJECT_ID',
+            '&target_issue_iid=:TARGET_ISSUE_IID',
+            '&link_type=:LINK_TYPE',
+        ]
+            .join('')
+            .replace(':PROJECT_ID', `${input.projectId}`)
+            .replace(':ISSUE_ID', `${input.issueId}`)
+            .replace(':TARGET_PROJECT_ID', input.targetProjectId)
+            .replace(':TARGET_ISSUE_IID', input.targetIssueIid)
+            .replace(':LINK_TYPE', input.linkType);
+
+        return await this.post(path, {});
     }
 }
