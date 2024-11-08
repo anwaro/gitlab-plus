@@ -1,7 +1,7 @@
 const header = `// ==UserScript==
 // @name         Gitlab plus
 // @namespace    https://lukaszmical.pl/
-// @version      2024-11-08
+// @version      2024-11-09
 // @description  Gitlab utils
 // @author       Łukasz Micał
 // @match        https://gitlab.com/*

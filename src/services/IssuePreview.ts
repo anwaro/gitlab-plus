@@ -28,8 +28,8 @@ export default class IssuePreview implements Service {
         const link = IssueLinks.parseLink(element.href);
         if (link) {
             const issue = await this.issue.getIssue(link.projectPath, link.issue);
-
             this.modal.updateContent(issue.data.project.issue);
+            this.modal.fixPosition(event);
         }
     }
 

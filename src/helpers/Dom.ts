@@ -13,8 +13,7 @@ export type HTMLData<
     attrs?: Attr<K> & Record<string, string>;
     events?: Events;
     styles?: Partial<CSSStyleDeclaration>;
-    html?: string;
-    children?: (HTMLData | HTMLElement | SVGElement)[];
+    children?: (HTMLData | HTMLElement | SVGElement)[] | string;
 };
 
 export class Dom {
@@ -25,7 +24,9 @@ export class Dom {
         if (data.classes) {
             element.className = data.classes;
         }
-        if (data.children) {
+        if (typeof data.children === 'string') {
+            element.innerHTML = data.children;
+        } else if (data.children) {
             element.append(
                 ...data.children.map((item) =>
                     item instanceof HTMLElement || item instanceof SVGElement
@@ -54,16 +55,16 @@ export class Dom {
             });
         }
 
-        if (data.html) {
-            element.innerHTML = data.html;
-        }
-
         return element;
     }
 
     static element<
         K extends keyof HTMLElementTagNameMap = keyof HTMLElementTagNameMap,
-    >(tag: K, classes?: string): HTMLElementTagNameMap[K] {
-        return Dom.create({tag, classes});
+    >(
+        tag: K,
+        classes?: string,
+        children?: HTMLData<K>['children'],
+    ): HTMLElementTagNameMap[K] {
+        return Dom.create({tag, classes, children});
     }
 }

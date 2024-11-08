@@ -5,6 +5,7 @@ import IssueAssignee from './IssueAssignee';
 import IssueLabels from './IssueLabels';
 import IssueMilestone from './IssueMilestone';
 import IssueIteration from './IssueIteration';
+import IssueMergeRequests from './IssueMergeRequests';
 
 export class IssueModalContent extends Component<'div'> {
     constructor() {
@@ -18,6 +19,7 @@ export class IssueModalContent extends Component<'div'> {
             IssueLabels,
             IssueMilestone,
             IssueIteration,
+            IssueMergeRequests,
         ];
 
         this.element.replaceChildren(

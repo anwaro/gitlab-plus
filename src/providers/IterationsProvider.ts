@@ -5,7 +5,7 @@ import {IterationsResponse} from '../types/Iteration';
 export class IterationsProvider extends GitlabProvider {
     async getIterations(projectId: string, title = '') {
         return await this.queryCached<IterationsResponse>(
-            `glp-iterations-${projectId} `,
+            `iterations-${projectId} `,
             iterationQuery,
             {
                 fullPath: projectId,

@@ -27,7 +27,7 @@ export class DropdownList<D extends DropdownItem> extends Component<'div'> {
                     tag: 'li',
                     classes:
                         'gl-pb-2 gl-pl-4 gl-pt-3 gl-text-sm gl-font-bold gl-text-strong',
-                    html: 'Recently used',
+                    children: 'Recently used',
                 }),
             );
             this.list.append(
@@ -50,8 +50,9 @@ export class DropdownList<D extends DropdownItem> extends Component<'div'> {
         if (items.length + recently.length === 0) {
             this.list.append(
                 Dom.create({
-                    tag: 'span',
-                    html: 'No options',
+                    tag: 'li',
+                    classes: 'gl-p-4',
+                    children: 'No options',
                 }),
             );
         }
@@ -80,7 +81,7 @@ export class DropdownList<D extends DropdownItem> extends Component<'div'> {
     renderCheck(item: D, selected: D[]) {
         const selectedIds = selected.map((i) => i.id);
         return new IconComponent(
-            selectedIds.includes(item.id) ? 'tick' : 'empty',
+            selectedIds.includes(item.id) ? 'mobile-issue-close' : '',
         ).getIcon();
     }
 }

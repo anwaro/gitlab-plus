@@ -1,7 +1,11 @@
 import Component from '../common/Component';
 
 export default class IssueBlock extends Component<'div'> {
-    constructor(title: string = '', content: HTMLElement[] | string) {
+    constructor(
+        title: string = '',
+        content: HTMLElement[] | HTMLElement | string,
+        classes = '',
+    ) {
         super('div', {
             classes: 'glp-block',
             children: [
@@ -9,13 +13,14 @@ export default class IssueBlock extends Component<'div'> {
                     tag: 'div',
                     classes:
                         'gl-flex gl-items-center gl-font-bold gl-leading-20 gl-text-gray-900',
-                    html: title,
+                    children: title,
                 },
                 {
                     tag: 'div',
+                    classes,
                     ...(typeof content === 'string'
-                        ? {html: content}
-                        : {children: content}),
+                        ? {children: content}
+                        : {children: Array.isArray(content) ? content : [content]}),
                 },
             ],
         });

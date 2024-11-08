@@ -8,9 +8,9 @@
     }
 }
 
-.glp-issue-modal {
+.glp-issue-preview-modal {
     position: absolute;
-    display: none;
+    display: flex;
     padding: 15px;
     background-color: var(--gl-background-color-default, var(--gl-color-neutral-0, #fff));
     border: 1px solid var(--gl-border-color-default);
@@ -18,14 +18,21 @@
     width: 300px;
     min-height: 300px;
     z-index: 99999;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .3s ease-out;
+    transition-property: visibility, opacity, transform;
 
     &.glp-modal-visible {
-        display: flex;
+        visibility: visible;
+        opacity: 1;
     }
 
     .glp-issue-modal-inner {
         display: flex;
         flex-direction: column;
+        max-width: 100%;
     }
 
     .glp-modal-loader {

@@ -5,7 +5,7 @@ import {milestoneQuery} from './query/milestone';
 export class MilestonesProvider extends GitlabProvider {
     async getMilestones(projectId: string, title: string = '') {
         return await this.queryCached<MilestonesResponse>(
-            `glp-milestones-${projectId}-${title}`,
+            `milestones-${projectId}-${title}`,
             milestoneQuery,
             {
                 fullPath: projectId,

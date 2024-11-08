@@ -47,17 +47,17 @@ export default class FormProject extends Dropdown<Project> {
                   tag: 'div',
                   classes:
                       'gl-mr-3 gl-avatar gl-avatar-identicon gl-avatar-s32 gl-avatar-identicon-bg1',
-                  html: item.name[0].toUpperCase(),
+                  children: item.name[0].toUpperCase(),
               });
 
         const label = Dom.create({
             tag: 'span',
             children: [
-                {tag: 'span', classes: 'gl-mr-2 gl-block', html: item.name},
+                {tag: 'span', classes: 'gl-mr-2 gl-block', children: item.name},
                 {
                     tag: 'span',
                     classes: 'gl-block gl-text-secondary',
-                    html: item.nameWithNamespace,
+                    children: item.nameWithNamespace,
                 },
             ],
         });
@@ -78,7 +78,7 @@ export default class FormProject extends Dropdown<Project> {
     renderLabel([item]: Project[]) {
         return Dom.create({
             tag: 'div',
-            html: item ? item.nameWithNamespace : 'Select project',
+            children: item ? item.nameWithNamespace : 'Select project',
         });
     }
 

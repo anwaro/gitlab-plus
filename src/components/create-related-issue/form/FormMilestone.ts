@@ -46,7 +46,7 @@ export default class FormMilestone extends Dropdown<Milestone> {
                     tag: 'span',
                     classes: 'gl-flex gl-w-full gl-items-center',
                     children: [
-                        {tag: 'span', classes: 'gl-mr-2 gl-block', html: item.title},
+                        {tag: 'span', classes: 'gl-mr-2 gl-block', children: item.title},
                     ],
                 },
             ],
@@ -56,7 +56,7 @@ export default class FormMilestone extends Dropdown<Milestone> {
     renderLabel([item]: Milestone[]) {
         return Dom.create({
             tag: 'div',
-            html: item ? item.title : 'Select milestone',
+            children: item ? item.title : 'Select milestone',
         });
     }
 

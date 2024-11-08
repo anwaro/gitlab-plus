@@ -9,6 +9,7 @@ export default class IssueAssignee extends IssueBlock {
             issue.assignees.nodes.map((assignee) =>
                 new UserComponent(assignee).getElement(),
             ),
+            'gl-flex gl-flex-col gl-gap-3',
         );
     }
 }

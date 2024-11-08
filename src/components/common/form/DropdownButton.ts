@@ -10,7 +10,7 @@ export class DropdownButton<D extends DropdownItem> extends Component<'button'> 
     );
     private icon = Dom.create({
         tag: 'span',
-        children: [new IconComponent('chevron', 's16').getIcon()],
+        children: [new IconComponent('chevron-lg-down', 's16').getIcon()],
     });
 
     constructor(
@@ -52,7 +52,7 @@ export class DropdownButton<D extends DropdownItem> extends Component<'button'> 
     render(items: D[]) {
         this.buttonLabel.replaceChildren(this.renderLabel(items));
         const icon = new IconComponent(
-            items.length ? 'close' : 'chevron',
+            items.length ? 'close-xs' : 'chevron-lg-down',
             's16',
         ).getIcon();
         if (items.length) {

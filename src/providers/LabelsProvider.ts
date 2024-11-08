@@ -5,7 +5,7 @@ import {labelsQuery} from './query/label';
 export class LabelsProvider extends GitlabProvider {
     async getLabels(projectId: string, search = '') {
         return this.queryCached<LabelsResponse>(
-            `glp-labels-${projectId}-${search}`,
+            `labels-${projectId}-${search}`,
             labelsQuery,
             {
                 fullPath: projectId,

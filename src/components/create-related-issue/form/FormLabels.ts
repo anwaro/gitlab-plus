@@ -50,7 +50,7 @@ export default class FormLabel extends Dropdown<Label> {
                 },
                 {
                     tag: 'span',
-                    html: item.title,
+                    children: item.title,
                 },
             ],
         });
@@ -69,7 +69,7 @@ export default class FormLabel extends Dropdown<Label> {
         }
         return Dom.create({
             tag: 'div',
-            html: label,
+            children: label,
         });
     }
 

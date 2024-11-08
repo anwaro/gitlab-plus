@@ -59,7 +59,7 @@ export default class CreateRelatedIssueModalContent extends Component<'form'> {
                     {
                         tag: 'span',
                         classes: 'gl-button-text',
-                        html: 'Add',
+                        children: 'Add',
                     },
                 ],
             }),

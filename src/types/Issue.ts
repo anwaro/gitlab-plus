@@ -75,6 +75,7 @@ export interface Project {
 export interface Issue {
     id: string;
     title: string;
+    description: string;
     createdAt: string;
     state: string;
     confidential: boolean;
@@ -82,6 +83,7 @@ export interface Issue {
     milestone: Milestone | null;
     labels: Nodes<Label>;
     assignees: Nodes<User>;
+    relatedMergeRequests: Nodes<MergeRequest>;
     iteration: Iteration | null;
     weight: number | null;
     type: string;
@@ -94,6 +96,13 @@ export interface Milestone {
     startDate: string;
     dueDate: string;
     __typename: string;
+}
+
+export interface MergeRequest {
+    iid: string;
+    title: string;
+    state: 'merged' | 'opened' | 'closed' | 'locked';
+    author: User;
 }
 
 export interface IssuesResponse {

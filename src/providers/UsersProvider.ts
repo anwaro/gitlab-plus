@@ -5,13 +5,13 @@ import {UsersResponse} from '../types/User';
 export class UsersProvider extends GitlabProvider {
     async getUsers(projectId: string, search = '') {
         return await this.queryCached<UsersResponse>(
-            `glp-users-${projectId}-${search}`,
+            `users-${projectId}-${search}`,
             userQuery,
             {
                 fullPath: projectId,
                 search,
             },
-            0.02,
+            search === '' ? 20 : 0.5,
         );
     }
 }

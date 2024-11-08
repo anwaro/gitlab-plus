@@ -4,7 +4,9 @@ type CacheItem = {
 };
 
 export default class Cache {
-    isValid(item?: CacheItem): item is CacheItem {
+    static prefix = 'glp-';
+
+    private isValid(item?: CacheItem): item is CacheItem {
         if (item) {
             return (
                 item.expirationDate === 'lifetime' ||
@@ -15,9 +17,18 @@ export default class Cache {
         return false;
     }
 
+    private getItem(key: string) {
+        try {
+            return JSON.parse(localStorage.getItem(key) || '');
+        } catch (e) {
+            // pass
+        }
+        return undefined;
+    }
+
     get<T>(key: string): T | undefined {
         try {
-            const data = JSON.parse(localStorage.getItem(key) || '');
+            const data = this.getItem(this.key(key));
             if (this.isValid(data)) {
                 return data.value as T;
             }
@@ -29,7 +40,7 @@ export default class Cache {
 
     set<T>(key: string, value: T, minutes: number | 'lifetime') {
         localStorage.setItem(
-            key,
+            this.key(key),
             JSON.stringify({
                 expirationDate: this.expirationDate(minutes),
                 value,
@@ -44,5 +55,17 @@ export default class Cache {
         const time = new Date();
         time.setMinutes(time.getMinutes() + minutes);
         return time;
+    }
+
+    key(key: string) {
+        return `${Cache.prefix}${key}`;
+    }
+
+    clearInvalid() {
+        for (const key in localStorage) {
+            if (key.startsWith(Cache.prefix) && !this.isValid(this.getItem(key))) {
+                localStorage.removeItem(key);
+            }
+        }
     }
 }

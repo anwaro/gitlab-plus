@@ -8,12 +8,12 @@ export default class Field extends Component<'fieldset'> {
                 {
                     tag: 'legend',
                     classes: 'bv-no-focus-ring col-form-label pt-0 col-form-label',
-                    html: title,
+                    children: title,
                 },
                 input,
                 {
                     tag: 'small',
-                    html: hint,
+                    children: hint,
                 },
             ],
         });

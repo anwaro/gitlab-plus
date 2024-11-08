@@ -1,6 +1,7 @@
 export default function intendHover(
     element: HTMLElement,
     listener: (ev: HTMLElementEventMap['mouseenter']) => void,
+    timeout = 500,
 ) {
     let hover = false;
     let id = 0;
@@ -11,7 +12,7 @@ export default function intendHover(
             if (hover) {
                 listener.call(element, ev);
             }
-        }, 1000);
+        }, timeout);
     };
 
     element.addEventListener('mouseenter', onHover);

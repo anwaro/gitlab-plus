@@ -23,7 +23,7 @@ export type CreateIssueLinkInput = {
 export class IssueProvider extends GitlabProvider {
     async getIssue(projectId: string, issueId: string) {
         return await this.queryCached<IssueResponse>(
-            `glp-issue-${projectId}-${issueId}`,
+            `issue-${projectId}-${issueId}`,
             issueQuery,
             {
                 projectPath: projectId,

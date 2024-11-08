@@ -79,9 +79,9 @@ export default class RelatedIssuesAutocompleteModal {
             tag: 'div',
             classes: 'gl-flex gl-gap-x-2 gl-py-2',
             children: [
-                new IconComponent('issue', 's16').getIcon(),
-                {tag: 'small', html: item.iid},
-                {tag: 'span', classes: 'gl-flex gl-flex-wrap', html: item.title},
+                new IconComponent('issue-type-issue', 's16').getIcon(),
+                {tag: 'small', children: item.iid},
+                {tag: 'span', classes: 'gl-flex gl-flex-wrap', children: item.title},
             ],
         });
     }

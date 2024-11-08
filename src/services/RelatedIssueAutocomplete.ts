@@ -15,7 +15,6 @@ export default class RelatedIssueAutocomplete implements Service {
     private initObserver() {
         const section = document.querySelector<HTMLElement>('#related-issues');
 
-        console.log('1. section', section);
         if (this.ready || !section) {
             return;
         }
@@ -25,7 +24,6 @@ export default class RelatedIssueAutocomplete implements Service {
             mutations.forEach((mutation) => {
                 if (mutation.type === 'childList') {
                     this.initAutocomplete(section);
-                    console.log('2. this.initAutocomplete()');
                 }
             });
         });

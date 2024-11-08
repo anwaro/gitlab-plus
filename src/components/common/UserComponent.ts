@@ -1,14 +1,16 @@
 import Component from './Component';
 import {User} from '../../types/User';
 
+type AvatarSize = 's16' | 's24';
+
 export class UserComponent extends Component<'div'> {
-    constructor(user: User) {
+    constructor(user: User, size: AvatarSize = 's24') {
         super('div', {
-            classes: 'assignee-grid gl-flex gl-w-full gl-items-center',
+            classes: 'gl-flex gl-w-full gl-items-center',
             children: [
                 {
                     tag: 'img',
-                    classes: 'gl-avatar gl-avatar-circle gl-avatar-s24',
+                    classes: `gl-avatar gl-avatar-circle gl-avatar-${size}`,
                     attrs: {
                         src: user.avatarUrl,
                         alt: "${assignee.name}'s avatar",
@@ -16,7 +18,8 @@ export class UserComponent extends Component<'div'> {
                 },
                 {
                     tag: 'span',
-                    html: user.name,
+                    classes: 'gl-ml-3',
+                    children: user.name,
                 },
             ],
         });

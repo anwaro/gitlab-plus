@@ -12,7 +12,7 @@ export default class CloseButton extends Component<'button'> {
             events: {
                 click: onClick,
             },
-            children: [new IconComponent('close', 's16').getIcon()],
+            children: [new IconComponent('close-xs', 's16').getIcon()],
         });
     }
 }

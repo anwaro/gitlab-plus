@@ -8,7 +8,7 @@ export default class CreateButton extends Component<'button'> {
                 {
                     tag: 'span',
                     classes: 'gl-button-text',
-                    html: 'Create related issue',
+                    children: 'Create related issue',
                 },
             ],
         });

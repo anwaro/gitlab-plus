@@ -12,7 +12,7 @@ export default class CreateRelatedIssueModalHeader extends Component<'div'> {
                     tag: 'h2',
                     classes:
                         'gl-m-0 gl-inline-flex gl-items-center gl-gap-3 gl-text-form gl-font-bold gl-leading-normal',
-                    html: 'Create related issue',
+                    children: 'Create related issue',
                 }),
                 new CloseButton(onClose).getElement(),
             ],

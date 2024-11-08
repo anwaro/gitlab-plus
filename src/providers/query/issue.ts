@@ -8,6 +8,7 @@ export const issueQuery = `query issueEE($projectPath: ID!, $iid: String!) {
       id
       iid
       title
+      description
       createdAt
       state
       confidential
@@ -22,6 +23,16 @@ export const issueQuery = `query issueEE($projectPath: ID!, $iid: String!) {
       labels {
         nodes {
           ...Label
+        }
+      }
+      relatedMergeRequests {
+        nodes {
+          iid
+          title
+          state
+          author {
+            ...User
+          }
         }
       }
       assignees {

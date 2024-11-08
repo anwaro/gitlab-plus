@@ -16,7 +16,7 @@ export class LabelComponent extends Component<'span'> {
             {
                 tag: 'span',
                 classes: 'gl-label-text',
-                html: scope,
+                children: scope,
             },
         ];
 
@@ -24,7 +24,7 @@ export class LabelComponent extends Component<'span'> {
             items.push({
                 tag: 'span',
                 classes: 'gl-label-text-scoped',
-                html: text,
+                children: text,
             });
         }
 
@@ -50,7 +50,7 @@ export class LabelComponent extends Component<'span'> {
                         {
                             tag: 'span',
                             classes: 'gl-button-text',
-                            children: [new IconComponent('close').getIcon()],
+                            children: [new IconComponent('close-xs').getIcon()],
                         },
                     ],
                 }),
@@ -61,9 +61,12 @@ export class LabelComponent extends Component<'span'> {
     }
 
     private setClasses(label: Label) {
-        this.addClassName('gl-label', 'hide-collapsed');
         this.addClassName(
-            label.textColor ? 'gl-label-text-light' : 'gl-label-text-dark',
+            'gl-label',
+            'hide-collapsed',
+            label.textColor === '#FFFFFF'
+                ? 'gl-label-text-light'
+                : 'gl-label-text-dark',
         );
 
         if (label.title.includes('::')) {

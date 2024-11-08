@@ -52,14 +52,14 @@ export default class FormAssignees extends Dropdown<User> {
                         {
                             tag: 'span',
                             classes: 'gl-avatar-labeled-label',
-                            html: item.name,
+                            children: item.name,
                         },
                     ],
                 },
                 {
                     tag: 'span',
                     classes: 'gl-avatar-labeled-sublabel',
-                    html: item.username,
+                    children: item.username,
                 },
             ],
         });
@@ -75,7 +75,7 @@ export default class FormAssignees extends Dropdown<User> {
     renderLabel([item]: User[]) {
         return Dom.create({
             tag: 'div',
-            html: item ? item.name : 'Select assignee',
+            children: item ? item.name : 'Select assignee',
         });
     }
 

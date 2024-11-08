@@ -1,15 +1,18 @@
 import Component from './Component';
 
-type IconNames = 'tick' | 'close' | 'empty' | 'chevron' | 'search' | 'issue';
-
-const iconMap: Record<IconNames, string> = {
-    empty: '',
-    tick: 'mobile-issue-close',
-    close: 'close-xs',
-    search: 'search',
-    chevron: 'chevron-lg-down',
-    issue: 'issue-type-issue',
-};
+export type IconNames =
+    | ''
+    | 'mobile-issue-close'
+    | 'close-xs'
+    | 'merge'
+    | 'merge-request-close'
+    | 'merge-request'
+    | 'empty'
+    | 'chevron-lg-down'
+    | 'search'
+    | 'issue-type-issue'
+    | 'issue-close'
+    | 'issue-open-m';
 
 export class IconComponent extends Component<'span'> {
     constructor(icon: IconNames, size: string = 's12', ...cls: string[]) {
@@ -19,7 +22,7 @@ export class IconComponent extends Component<'span'> {
         svg.classList.add('gl-icon', size, 'gl-fill-current', ...cls);
         use.setAttribute(
             'href',
-            `/assets/icons-236e3b687d786d9dfe4709143a94d4c53b8d5a1f235775401e5825148297fa84.svg#${iconMap[icon]}`,
+            `/assets/icons-236e3b687d786d9dfe4709143a94d4c53b8d5a1f235775401e5825148297fa84.svg#${icon}`,
         );
         svg.appendChild(use);
         this.element.append(svg);

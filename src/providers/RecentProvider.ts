@@ -9,7 +9,7 @@ export class RecentProvider<T extends Item> {
     private readonly key: string;
 
     constructor(key: string) {
-        this.key = `glp-recent-${key}`;
+        this.key = `recent-${key}`;
     }
 
     get() {

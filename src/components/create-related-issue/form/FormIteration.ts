@@ -58,7 +58,7 @@ export default class FormIteration extends Dropdown<IterationNamed> {
                     tag: 'span',
                     classes: 'gl-flex gl-w-full gl-items-center',
                     children: [
-                        {tag: 'span', classes: 'gl-mr-2 gl-block', html: item.name},
+                        {tag: 'span', classes: 'gl-mr-2 gl-block', children: item.name},
                     ],
                 },
             ],
@@ -68,7 +68,7 @@ export default class FormIteration extends Dropdown<IterationNamed> {
     renderLabel([item]: IterationNamed[]) {
         return Dom.create({
             tag: 'div',
-            html: item ? item.name : 'Select iteration',
+            children: item ? item.name : 'Select iteration',
         });
     }
 

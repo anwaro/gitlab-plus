@@ -15,9 +15,21 @@ export default class IssuePreviewModal extends Component<'div'> {
 
     show(event: HTMLElementEventMap['mouseenter']) {
         this.element.appendChild(this.loader.getElement());
-        this.element.style.left = `${event.pageX + 5}px`;
-        this.element.style.top = `${event.pageY + 5}px`;
+        this.element.style.left = `${event.pageX + 10}px`;
+        this.element.style.top = `${event.pageY + 10}px`;
+        this.element.style.transform = 'translateY(0px)';
         this.element.classList.add(this.visibleClassName);
+    }
+
+    fixPosition(event: HTMLElementEventMap['mouseenter']) {
+        const dY =
+            event.screenY +
+            this.element.getBoundingClientRect().height -
+            window.innerHeight;
+
+        if (dY > 0) {
+            this.element.style.transform = `translateY(-${dY + 15}px)`;
+        }
     }
 
     hide() {

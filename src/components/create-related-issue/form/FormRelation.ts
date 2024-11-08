@@ -44,7 +44,7 @@ export default class FormRelation extends Field {
                     attrs: {
                         for: id,
                     },
-                    html: label,
+                    children: label,
                 },
             ],
         });

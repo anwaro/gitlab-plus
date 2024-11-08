@@ -1,14 +1,19 @@
 import {Issue} from '../../types/Issue';
 import IssueBlock from './IssueBlock';
 import {LabelComponent} from '../common/LabelComponent';
+import {Dom} from '../../helpers/Dom';
 
 export default class IssueLabels extends IssueBlock {
     constructor(issue: Issue) {
         super(
             'Labels',
-            issue.labels.nodes.map((label) =>
-                new LabelComponent(label).getElement(),
-            ),
+            Dom.create({
+                tag: 'div',
+                classes: 'issuable-show-labels',
+                children: issue.labels.nodes.map((label) =>
+                    new LabelComponent(label).getElement(),
+                ),
+            }),
         );
     }
 }
