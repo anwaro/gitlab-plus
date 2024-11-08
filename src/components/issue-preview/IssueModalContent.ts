@@ -8,7 +8,7 @@ import IssueIteration from './IssueIteration';
 
 export class IssueModalContent extends Component<'div'> {
     constructor() {
-        super('div', {classes: 'glp-issue-preview-modal-inner'});
+        super('div', {classes: 'glp-issue-modal-inner'});
     }
 
     update(issue: Issue) {

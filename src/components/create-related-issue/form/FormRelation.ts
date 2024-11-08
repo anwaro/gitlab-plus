@@ -5,13 +5,13 @@ export default class FormRelation extends Field {
     public value = '';
 
     constructor() {
-        const container = Dom.element('div', 'linked-issue-preview-type-radio');
-        super('New issue-preview', container);
+        const container = Dom.element('div', 'linked-issue-type-radio');
+        super('New issue', container);
 
         container.append(
-            this.radio('blocks current issue-preview', 'blocks'),
-            this.radio('is blocked by current issue-preview', 'is_blocked_by'),
-            this.radio('relates to current issue-preview', 'related'),
+            this.radio('blocks current issue', 'blocks'),
+            this.radio('is blocked by current issue', 'is_blocked_by'),
+            this.radio('relates to current issue', 'related'),
         );
     }
 
@@ -30,7 +30,7 @@ export default class FormRelation extends Field {
                     classes: 'custom-control-input',
                     attrs: {
                         id,
-                        name: 'linked-issue-preview-type-radio',
+                        name: 'linked-issue-type-radio',
                         value: value,
                         type: 'radio',
                     },

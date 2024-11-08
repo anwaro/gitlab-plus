@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Gitlab plus
 // @namespace    https://lukaszmical.pl/
-// @version      2024-11-07
+// @version      2024-11-08
 // @description  Gitlab utils
 // @author       Łukasz Micał
 // @match        https://gitlab.com/*
@@ -638,7 +638,7 @@ const IconComponent_1 = __webpack_require__(4332);
 class CloseButton extends Component_1.default {
     constructor(onClick) {
         super('button', {
-            classes: 'btn js-issue-preview-item-remove-button gl-mr-2 btn-default btn-sm gl-button btn-default-tertiary btn-icon',
+            classes: 'btn js-issue-item-remove-button gl-mr-2 btn-default btn-sm gl-button btn-default-tertiary btn-icon',
             attrs: {
                 type: 'button',
             },
@@ -691,7 +691,7 @@ exports.IconComponent = void 0;
 const Component_1 = __webpack_require__(3318);
 const iconMap = {
     empty: '',
-    tick: 'mobile-issue-preview-close',
+    tick: 'mobile-issue-close',
     close: 'close-xs',
     search: 'search',
     chevron: 'chevron-lg-down',
@@ -1698,10 +1698,10 @@ const Field_1 = __webpack_require__(59);
 const Dom_1 = __webpack_require__(3429);
 class FormRelation extends Field_1.default {
     constructor() {
-        const container = Dom_1.Dom.element('div', 'linked-issue-preview-type-radio');
-        super('New issue-preview', container);
+        const container = Dom_1.Dom.element('div', 'linked-issue-type-radio');
+        super('New issue', container);
         this.value = '';
-        container.append(this.radio('blocks current issue-preview', 'blocks'), this.radio('is blocked by current issue-preview', 'is_blocked_by'), this.radio('relates to current issue-preview', 'related'));
+        container.append(this.radio('blocks current issue', 'blocks'), this.radio('is blocked by current issue', 'is_blocked_by'), this.radio('relates to current issue', 'related'));
     }
     onChange(e) {
         this.value = e.target.value;
@@ -1717,7 +1717,7 @@ class FormRelation extends Field_1.default {
                     classes: 'custom-control-input',
                     attrs: {
                         id,
-                        name: 'linked-issue-preview-type-radio',
+                        name: 'linked-issue-type-radio',
                         value: value,
                         type: 'radio',
                     },
@@ -1955,7 +1955,7 @@ const IssueMilestone_1 = __webpack_require__(7087);
 const IssueIteration_1 = __webpack_require__(7233);
 class IssueModalContent extends Component_1.default {
     constructor() {
-        super('div', { classes: 'glp-issue-preview-modal-inner' });
+        super('div', { classes: 'glp-issue-modal-inner' });
     }
     update(issue) {
         const components = [

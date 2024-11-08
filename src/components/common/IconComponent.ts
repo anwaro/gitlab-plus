@@ -4,7 +4,7 @@ type IconNames = 'tick' | 'close' | 'empty' | 'chevron' | 'search' | 'issue';
 
 const iconMap: Record<IconNames, string> = {
     empty: '',
-    tick: 'mobile-issue-preview-close',
+    tick: 'mobile-issue-close',
     close: 'close-xs',
     search: 'search',
     chevron: 'chevron-lg-down',
