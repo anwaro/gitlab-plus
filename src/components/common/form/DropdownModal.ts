@@ -13,13 +13,11 @@ export class DropdownModal extends Component<'div'> {
             events: {
                 click: (e) => e.stopPropagation(),
             },
-            children: [
-                {
-                    tag: 'div',
-                    classes: 'gl-new-dropdown-inner',
-                    children: [search, list],
-                },
-            ],
+            children: {
+                tag: 'div',
+                classes: 'gl-new-dropdown-inner',
+                children: [search, list],
+            },
         });
     }
 

@@ -2,6 +2,7 @@ const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 const header = require('./src/header');
+const greasyForkMinify = require('./src/minify');
 
 const isDev = process.argv.some((v) => v.includes('development'));
 
@@ -13,7 +14,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, './dist'),
-        filename: 'index.js',
+        filename: isDev ? 'dev.js' : 'index.js',
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
@@ -25,29 +26,19 @@ module.exports = {
                 loader: 'ts-loader',
             },
             {
-                test: /\.(s(a|c)ss)$/,
-                use: ['style-loader', 'css-loader', 'sass-loader'],
+                test: /\.css$/,
+                use: ['raw-loader'],
             },
         ],
     },
     optimization: {
+        chunkIds: 'named',
+        moduleIds: 'named',
         concatenateModules: true,
-        minimize: false,
+        minimize: !isDev,
         minimizer: [
             new TerserPlugin({
-                terserOptions: {
-                    sourceMap: false,
-                    output: {
-                        comments: function (node, comment) {
-                            return (
-                                /^ @\w+/.test(comment.value) ||
-                                /^ ==/.test(comment.value)
-                            );
-                        },
-                    },
-                },
-                extractComments: false,
-                include: /\.js$/,
+                minify: greasyForkMinify,
             }),
         ],
     },

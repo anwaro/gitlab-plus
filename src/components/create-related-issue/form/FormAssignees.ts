@@ -2,7 +2,7 @@ import Dropdown from '../../common/form/Dropdown';
 import {Dom} from '../../../helpers/Dom';
 import {UsersProvider} from '../../../providers/UsersProvider';
 import {RecentProvider} from '../../../providers/RecentProvider';
-import {IssueLink} from '../../../helpers/IssueLinks';
+import {IssueLinkType} from '../../../helpers/IssueLink';
 import {User} from '../../../types/User';
 
 export default class FormAssignees extends Dropdown<User> {
@@ -10,7 +10,7 @@ export default class FormAssignees extends Dropdown<User> {
     private assignees = new UsersProvider();
     private searchUser: (search: string) => void;
 
-    constructor(private link: IssueLink) {
+    constructor(private link: IssueLinkType) {
         super('Assignees');
         this.load('');
         this.searchUser = this.assignees.debounce(this.load.bind(this));
@@ -48,13 +48,11 @@ export default class FormAssignees extends Dropdown<User> {
                     tag: 'div',
                     classes:
                         '-gl-mx-1 -gl-my-1 gl-flex gl-flex-wrap gl-items-center !gl-text-left',
-                    children: [
-                        {
-                            tag: 'span',
-                            classes: 'gl-avatar-labeled-label',
-                            children: item.name,
-                        },
-                    ],
+                    children: {
+                        tag: 'span',
+                        classes: 'gl-avatar-labeled-label',
+                        children: item.name,
+                    },
                 },
                 {
                     tag: 'span',

@@ -1,5 +1,4 @@
-import './styles/index.scss';
-
+import './styles';
 import IssuePreview from './services/IssuePreview';
 import ImagePreview from './services/ImagePreview';
 import CreateRelatedIssue from './services/CreateRelatedIssue';

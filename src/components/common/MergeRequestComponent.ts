@@ -25,7 +25,7 @@ export class MergeRequestComponent extends Component<'div'> {
                         's16',
                         'merge-request-status',
                         mr.state,
-                    ).getIcon(),
+                    ).getElement(),
                     {
                         tag: 'span',
                         classes: 'gl-text-gray-500',

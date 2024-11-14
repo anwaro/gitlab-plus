@@ -10,7 +10,7 @@ export class DropdownButton<D extends DropdownItem> extends Component<'button'> 
     );
     private icon = Dom.create({
         tag: 'span',
-        children: [new IconComponent('chevron-lg-down', 's16').getIcon()],
+        children: [new IconComponent('chevron-lg-down', 's16').getElement()],
     });
 
     constructor(
@@ -54,7 +54,7 @@ export class DropdownButton<D extends DropdownItem> extends Component<'button'> 
         const icon = new IconComponent(
             items.length ? 'close-xs' : 'chevron-lg-down',
             's16',
-        ).getIcon();
+        ).getElement();
         if (items.length) {
             icon.addEventListener('click', (e) => {
                 e.preventDefault();

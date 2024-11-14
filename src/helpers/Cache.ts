@@ -21,9 +21,8 @@ export default class Cache {
         try {
             return JSON.parse(localStorage.getItem(key) || '');
         } catch (e) {
-            // pass
+            return undefined;
         }
-        return undefined;
     }
 
     get<T>(key: string): T | undefined {
@@ -33,7 +32,7 @@ export default class Cache {
                 return data.value as T;
             }
         } catch (e) {
-            // pass
+            return undefined;
         }
         return undefined;
     }

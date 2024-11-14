@@ -34,16 +34,11 @@ export default class IssuePreviewModal extends Component<'div'> {
 
     hide() {
         this.element.classList.remove(this.visibleClassName);
-        this.clear();
-    }
-
-    clear() {
-        this.element.innerHTML = '';
+        this.element.replaceChildren();
     }
 
     updateContent(issue: Issue) {
         this.content.update(issue);
-        this.clear();
-        this.element.appendChild(this.content.getElement());
+        this.element.replaceChildren(this.content.getElement());
     }
 }

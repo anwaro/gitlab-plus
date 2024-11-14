@@ -1,17 +1,9 @@
 import Cache from '../helpers/Cache';
-import GraphQl from '../helpers/GraphQl';
 
 export class GitlabProvider {
     private cache = new Cache();
     private url = 'https://gitlab.com/api/v4/';
     private graphqlApi = 'https://gitlab.com/api/graphql';
-
-    async get<T>(path: string): Promise<T> {
-        const response = await fetch(`${this.url}${path}`, {
-            headers: this.headers(),
-        });
-        return response.json();
-    }
 
     async post<D, R>(path: string, body: D): Promise<R> {
         const response = await fetch(`${this.url}${path}`, {
@@ -25,23 +17,10 @@ export class GitlabProvider {
     async query<T>(query: string, variables: Record<string, unknown>): Promise<T> {
         const response = await fetch(this.graphqlApi, {
             method: 'POST',
-            body: GraphQl.body(query, variables),
+            body: JSON.stringify({variables, query}),
             headers: this.headers(),
         });
         return response.json();
-    }
-
-    async getCached<T>(key: string, path: string, minutes: number): Promise<T> {
-        const cacheValue = this.cache.get<T>(key);
-        if (cacheValue) {
-            return cacheValue;
-        }
-
-        const value = await this.get<T>(path);
-
-        this.cache.set(key, value, minutes);
-
-        return value;
     }
 
     async queryCached<T>(

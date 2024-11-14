@@ -1,9 +1,9 @@
-import {Dom, HTMLData} from '../../helpers/Dom';
+import {Dom, HtmlData} from '../../helpers/Dom';
 
 export default class Component<K extends keyof HTMLElementTagNameMap> {
     protected element: HTMLElementTagNameMap[K];
 
-    constructor(tag: K, props: Omit<HTMLData<K>, 'tag'> = {}) {
+    constructor(tag: K, props: Omit<HtmlData<K>, 'tag'> = {}) {
         this.element = Dom.create({tag, ...props});
     }
 

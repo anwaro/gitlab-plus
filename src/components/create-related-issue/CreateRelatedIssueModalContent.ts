@@ -1,5 +1,5 @@
 import Component from '../common/Component';
-import {IssueLink, IssueLinks} from '../../helpers/IssueLinks';
+import {IssueLink, IssueLinkType} from '../../helpers/IssueLink';
 import {
     CreateIssueInput,
     CreateIssueLinkInput,
@@ -25,7 +25,7 @@ export default class CreateRelatedIssueModalContent extends Component<'form'> {
     private relation: FormRelation;
 
     constructor(
-        private link: IssueLink,
+        private link: IssueLinkType,
         private onClose: () => void,
     ) {
         super('form', {
@@ -55,13 +55,11 @@ export default class CreateRelatedIssueModalContent extends Component<'form'> {
                 events: {
                     click: this.createIssue.bind(this),
                 },
-                children: [
-                    {
-                        tag: 'span',
-                        classes: 'gl-button-text',
-                        children: 'Add',
-                    },
-                ],
+                children: {
+                    tag: 'span',
+                    classes: 'gl-button-text',
+                    children: 'Add',
+                },
             }),
         );
     }
@@ -87,7 +85,7 @@ export default class CreateRelatedIssueModalContent extends Component<'form'> {
 
     async createIssue() {
         const data = this.getFormValue();
-        const link = IssueLinks.parseLink(window.location.href);
+        const link = IssueLink.parseLink(window.location.href);
         if (!data || !link) {
             return;
         }

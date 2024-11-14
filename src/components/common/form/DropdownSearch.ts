@@ -24,18 +24,16 @@ export class DropdownSearch extends Component<'div'> {
                     'search',
                     's16',
                     'gl-search-box-by-type-search-icon',
-                ).getIcon(),
+                ).getElement(),
                 this.input,
                 {
                     tag: 'div',
                     classes: 'gl-search-box-by-type-right-icons',
                     styles: {top: '0'},
-                    children: [
-                        new CloseButton(() => {
-                            this.input.value = '';
-                            this.onChange('');
-                        }).getElement(),
-                    ],
+                    children: new CloseButton(() => {
+                        this.input.value = '';
+                        this.onChange('');
+                    }).getElement(),
                 },
             ],
         });

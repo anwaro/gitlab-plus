@@ -4,13 +4,11 @@ export default class CreateButton extends Component<'button'> {
     constructor() {
         super('button', {
             classes: 'btn btn-default btn-sm gl-button',
-            children: [
-                {
-                    tag: 'span',
-                    classes: 'gl-button-text',
-                    children: 'Create related issue',
-                },
-            ],
+            children: {
+                tag: 'span',
+                classes: 'gl-button-text',
+                children: 'Create related issue',
+            },
         });
     }
 
@@ -19,7 +17,7 @@ export default class CreateButton extends Component<'button'> {
             '#related-issues [data-testid="crud-actions"]',
         );
 
-        if (parent) {
+        if (parent && !this.element.parentNode) {
             this.mount(parent as HTMLElement);
         }
     }

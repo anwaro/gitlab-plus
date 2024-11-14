@@ -1,6 +1,6 @@
 import Component from './Component';
 import {Label} from '../../types/Label';
-import {Dom, HTMLData} from '../../helpers/Dom';
+import {Dom, HtmlData} from '../../helpers/Dom';
 import {IconComponent} from './IconComponent';
 
 export class LabelComponent extends Component<'span'> {
@@ -12,7 +12,7 @@ export class LabelComponent extends Component<'span'> {
 
     html(label: Label, onRemove?: () => void) {
         const [scope, text] = label.title.split('::');
-        const items: HTMLData[] = [
+        const items: HtmlData[] = [
             {
                 tag: 'span',
                 classes: 'gl-label-text',
@@ -46,13 +46,11 @@ export class LabelComponent extends Component<'span'> {
                         type: 'button',
                     },
                     events: {click: onRemove},
-                    children: [
-                        {
-                            tag: 'span',
-                            classes: 'gl-button-text',
-                            children: [new IconComponent('close-xs').getIcon()],
-                        },
-                    ],
+                    children: {
+                        tag: 'span',
+                        classes: 'gl-button-text',
+                        children: new IconComponent('close-xs').getElement(),
+                    },
                 }),
             );
         }

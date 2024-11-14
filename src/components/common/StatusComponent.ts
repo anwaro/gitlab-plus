@@ -7,12 +7,11 @@ export class StatusComponent extends Component<'span'> {
             classes: `gl-badge badge badge-pill ${
                 isOpen ? 'badge-success' : 'badge-info'
             }`,
-
             children: [
                 new IconComponent(
                     isOpen ? 'issue-open-m' : 'issue-close',
                     's16',
-                ).getIcon(),
+                ).getElement(),
                 {
                     tag: 'span',
                     classes: 'gl-badge-content',

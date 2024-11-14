@@ -3,7 +3,7 @@ import {Dom} from '../../../helpers/Dom';
 import {LabelsProvider} from '../../../providers/LabelsProvider';
 import {RecentProvider} from '../../../providers/RecentProvider';
 import {Label} from '../../../types/Label';
-import {IssueLink} from '../../../helpers/IssueLinks';
+import {IssueLinkType} from '../../../helpers/IssueLink';
 import {LabelComponent} from '../../common/LabelComponent';
 
 export default class FormLabel extends Dropdown<Label> {
@@ -11,7 +11,7 @@ export default class FormLabel extends Dropdown<Label> {
     private recent = new RecentProvider<Label>('labels');
     private searchLabels: (search: string) => void;
 
-    constructor(private link: IssueLink) {
+    constructor(private link: IssueLinkType) {
         super('Labels', true);
         this.extra.classList.add(
             'gl-mt-1',

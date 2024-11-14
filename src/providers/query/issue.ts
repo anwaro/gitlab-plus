@@ -20,6 +20,18 @@ export const issueQuery = `query issueEE($projectPath: ID!, $iid: String!) {
         dueDate
         __typename
       }
+      iteration {
+        id
+        title
+        startDate
+        dueDate
+        iterationCadence {
+          id
+          title
+          __typename
+        }
+        __typename
+      }
       labels {
         nodes {
           ...Label

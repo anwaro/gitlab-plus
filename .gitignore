@@ -32,3 +32,4 @@ deploy.sh
 remote.sh
 .eslintcache
 build
+dist/dev.js

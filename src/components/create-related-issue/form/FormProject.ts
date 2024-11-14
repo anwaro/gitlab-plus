@@ -3,14 +3,14 @@ import {Dom} from '../../../helpers/Dom';
 import {ProjectsProvider} from '../../../providers/ProjectsProvider';
 import {RecentProvider} from '../../../providers/RecentProvider';
 import {Project} from '../../../types/Project';
-import {IssueLink} from '../../../helpers/IssueLinks';
+import {IssueLinkType} from '../../../helpers/IssueLink';
 
 export default class FormProject extends Dropdown<Project> {
     private projects = new ProjectsProvider();
     private recent = new RecentProvider<Project>('projects');
     private searchProjects: (search: string) => void;
 
-    constructor(private link: IssueLink) {
+    constructor(private link: IssueLinkType) {
         super('Project');
 
         this.searchProjects = this.projects.debounce(this.load.bind(this));

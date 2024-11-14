@@ -18,9 +18,7 @@ export default class IssueBlock extends Component<'div'> {
                 {
                     tag: 'div',
                     classes,
-                    ...(typeof content === 'string'
-                        ? {children: content}
-                        : {children: Array.isArray(content) ? content : [content]}),
+                    children: content,
                 },
             ],
         });

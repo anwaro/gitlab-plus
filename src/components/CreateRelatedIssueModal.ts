@@ -2,7 +2,7 @@ import Component from './common/Component';
 import CreateRelatedIssueModalHeader from './create-related-issue/CreateRelatedIssueModalHeader';
 import CreateRelatedIssueModalContent from './create-related-issue/CreateRelatedIssueModalContent';
 import {Dom} from '../helpers/Dom';
-import {IssueLinks} from '../helpers/IssueLinks';
+import {IssueLink} from '../helpers/IssueLink';
 
 export default class CreateRelatedIssueModal extends Component<'div'> {
     private visibleClassName = 'glp-modal-visible';
@@ -18,7 +18,7 @@ export default class CreateRelatedIssueModal extends Component<'div'> {
             children: [container],
         });
 
-        const link = IssueLinks.parseLink(window.location.href);
+        const link = IssueLink.parseLink(window.location.href);
         if (link) {
             const form = new CreateRelatedIssueModalContent(
                 link,

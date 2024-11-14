@@ -65,16 +65,11 @@ export class DropdownList<D extends DropdownItem> extends Component<'div'> {
             events: {
                 click: () => this.onClick(item),
             },
-            children: [
-                {
-                    tag: 'span',
-                    classes: 'gl-new-dropdown-item-content',
-                    children: [
-                        this.renderCheck(item, selected),
-                        this.renderItem(item),
-                    ],
-                },
-            ],
+            children: {
+                tag: 'span',
+                classes: 'gl-new-dropdown-item-content',
+                children: [this.renderCheck(item, selected), this.renderItem(item)],
+            },
         });
     }
 
@@ -82,6 +77,6 @@ export class DropdownList<D extends DropdownItem> extends Component<'div'> {
         const selectedIds = selected.map((i) => i.id);
         return new IconComponent(
             selectedIds.includes(item.id) ? 'mobile-issue-close' : '',
-        ).getIcon();
+        ).getElement();
     }
 }

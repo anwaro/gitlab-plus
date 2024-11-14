@@ -2,7 +2,7 @@ import Dropdown from '../../common/form/Dropdown';
 import {Dom} from '../../../helpers/Dom';
 import {MilestonesProvider} from '../../../providers/MilestonesProvider';
 import {RecentProvider} from '../../../providers/RecentProvider';
-import {IssueLink} from '../../../helpers/IssueLinks';
+import {IssueLinkType} from '../../../helpers/IssueLink';
 import {Milestone} from '../../../types/Milestone';
 
 export default class FormMilestone extends Dropdown<Milestone> {
@@ -10,7 +10,7 @@ export default class FormMilestone extends Dropdown<Milestone> {
     private recent = new RecentProvider<Milestone>('milestones');
     private searchMilestones: (search: string) => void;
 
-    constructor(private link: IssueLink) {
+    constructor(private link: IssueLinkType) {
         super('Milestone');
         this.searchMilestones = this.milestones.debounce(this.load.bind(this));
 

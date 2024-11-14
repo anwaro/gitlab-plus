@@ -2,7 +2,7 @@ import Dropdown from '../../common/form/Dropdown';
 import {Dom} from '../../../helpers/Dom';
 import {IterationsProvider} from '../../../providers/IterationsProvider';
 import {RecentProvider} from '../../../providers/RecentProvider';
-import {IssueLink} from '../../../helpers/IssueLinks';
+import {IssueLinkType} from '../../../helpers/IssueLink';
 import {Iteration} from '../../../types/Iteration';
 
 type IterationNamed = Iteration & {name: string};
@@ -12,7 +12,7 @@ export default class FormIteration extends Dropdown<IterationNamed> {
     private recent = new RecentProvider<IterationNamed>('iterations');
     private searchIterations: (search: string) => void;
 
-    constructor(private link: IssueLink) {
+    constructor(private link: IssueLinkType) {
         super('Iteration');
 
         this.searchIterations = this.iterations.debounce(this.load.bind(this));

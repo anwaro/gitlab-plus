@@ -2,7 +2,7 @@ import AutocompleteModal from './related-issue-autocomplete/AutocompleteModal';
 import {IssueAutocomplete} from '../types/Issue';
 import {Dom} from '../helpers/Dom';
 import {IssueProvider} from '../providers/IssueProvider';
-import {IssueLink, IssueLinks} from '../helpers/IssueLinks';
+import {IssueLinkType, IssueLink} from '../helpers/IssueLink';
 import {IconComponent} from './common/IconComponent';
 
 export default class RelatedIssuesAutocompleteModal {
@@ -11,11 +11,11 @@ export default class RelatedIssuesAutocompleteModal {
     private autocompleteModal: AutocompleteModal<IssueAutocomplete>;
     private issueProvider = new IssueProvider();
     private search: (search: string) => void;
-    private link: IssueLink | undefined;
+    private link: IssueLinkType | undefined;
 
     constructor() {
         this.search = this.issueProvider.debounce(this.load.bind(this));
-        this.link = IssueLinks.parseLink(window.location.href);
+        this.link = IssueLink.parseLink(window.location.href);
         this.autocompleteModal = new AutocompleteModal<IssueAutocomplete>(
             this.onSelect.bind(this),
             this.renderItem.bind(this),
@@ -79,7 +79,7 @@ export default class RelatedIssuesAutocompleteModal {
             tag: 'div',
             classes: 'gl-flex gl-gap-x-2 gl-py-2',
             children: [
-                new IconComponent('issue-type-issue', 's16').getIcon(),
+                new IconComponent('issue-type-issue', 's16').getElement(),
                 {tag: 'small', children: item.iid},
                 {tag: 'span', classes: 'gl-flex gl-flex-wrap', children: item.title},
             ],
